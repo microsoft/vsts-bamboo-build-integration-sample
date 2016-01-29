@@ -1,0 +1,21 @@
+[@ui.bambooSection title='Microsoft Team Foundation Server Connector' ]
+    [@ww.checkbox label='Send build result to Microsoft Team Foundation Server' toggle=true name='custom.com.microsoft.teamfoundation.bamboo.configuration.enabled' /]
+    [@ui.bambooSection dependsOn='custom.com.microsoft.teamfoundation.bamboo.configuration.enabled']
+
+        [@ww.textfield name='custom.com.microsoft.teamfoundation.bamboo.configuration.serverUrl' label='Server URL' description="Microsoft Team Foundation Server or Visual Studio Team Services collection level URL"/]
+        [@ww.textfield name='custom.com.microsoft.teamfoundation.bamboo.configuration.username' label='Username' /]
+
+        [#if buildConfiguration.getString('custom.com.microsoft.teamfoundation.bamboo.configuration.password')?has_content]
+            [@ww.checkbox label='Change Password' toggle=true name='custom.com.microsoft.teamfoundation.bamboo.configuration.password.change' /]
+            [@ui.bambooSection dependsOn='custom.com.microsoft.teamfoundation.bamboo.configuration.password.change']
+                [@ww.password label='Password' name='custom.com.microsoft.teamfoundation.bamboo.configuration.password.cleartext' /]
+            [/@ui.bambooSection]
+        [#else]
+            [@ww.hidden name='custom.com.microsoft.teamfoundation.bamboo.configuration.password.change' value='true' /]
+            [@ww.password label='Password' name='custom.com.microsoft.teamfoundation.bamboo.configuration.password.cleartext' /]
+        [/#if]
+
+        [@ww.textfield name='custom.com.microsoft.teamfoundation.bamboo.configuration.project' label='Project Name' /]
+        [@ww.textfield name='custom.com.microsoft.teamfoundation.bamboo.configuration.builddefinition' label='Build Definition' /]
+    [/@ui.bambooSection]
+[/@ui.bambooSection]

@@ -1,0 +1,48 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="tfs-connector"/>
+
+    <!-- Components -->
+    <component key="tfsBuildFacadeFactory" class="com.microsoft.teamfoundation.plugin.impl.TfsBuildFacadeFactoryImpl">
+        <interface>com.microsoft.teamfoundation.plugin.TfsBuildFacadeFactory</interface>
+    </component>
+
+    <component key="tfsClientFactory" class="com.microsoft.teamfoundation.plugin.impl.TfsClientFactoryImpl">
+        <interface>com.microsoft.teamfoundation.plugin.TfsClientFactory</interface>
+    </component>
+
+    <!-- actions -->
+    <preChainAction key="tfsPreChainAction" name="TFS Build Setup" class="com.microsoft.teamfoundation.bamboo.action.TfsPreChainAction">
+        <description>Sets up the TFS/VSTS build if the Chain has the plugin enabled</description>
+    </preChainAction>
+
+    <postChainAction key="tfsPostChainAction" name="TFS Build Update Status" class="com.microsoft.teamfoundation.bamboo.action.TfsPostChainAction">
+        <description>Send plan result to TFS/VSTS if the Chain has the plugin enabled</description>
+    </postChainAction>
+
+    <postBuildCompletedAction key="tfsPostBuildCompletedAction" name="TFS Task Update Status" class="com.microsoft.teamfoundation.bamboo.action.TfsPostBuildCompleteAction">
+        <description>Update tracking task on TFS/VSTS to reflect job status</description>
+    </postBuildCompletedAction>
+
+    <!-- client side action -->
+    <preBuildAction key="tfsPreBuildAction"  name="TFS Task Setup" class="com.microsoft.teamfoundation.bamboo.action.TfsPreBuildAction">
+        <description>Create a task on TFS/VSTS to track a job.</description>
+    </preBuildAction>
+
+    <!-- settings -->
+    <additionalBuildConfigurationPlugin key="tfsSettingsPlugin" name="Configure Microsoft Team Foundation Server"
+                              class="com.microsoft.teamfoundation.bamboo.configuration.TfsConfigurator">
+        <resource type="freemarker" name="edit" location="templates/plugins/tfsConfiguratorEdit.ftl"/>
+        <resource type="freemarker" name="view" location="templates/plugins/tfsConfiguratorView.ftl"/>
+        <description>Configure Microsoft Team Foundation Server information.</description>
+    </additionalBuildConfigurationPlugin>
+
+</atlassian-plugin>

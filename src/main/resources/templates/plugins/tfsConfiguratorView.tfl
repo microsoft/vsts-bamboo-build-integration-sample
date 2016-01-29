@@ -1,0 +1,7 @@
+[#if build.buildDefinition.customConfiguration.get('custom.com.microsoft.teamfoundation.bamboo.tfsBuildNotifier.serverUrl')?has_content ]
+    [@ui.bambooInfoDisplay titleKey='Microsoft Team Foundation Server' float=false height='80px']
+        [@ww.label label='TFS Server URL' ]
+            [@ww.param name='value']${build.buildDefinition.customConfiguration.get('custom.com.microsoft.teamfoundation.bamboo.tfsBuildNotifier.serverUrl')?if_exists}[/@ww.param]
+        [/@ww.label]
+    [/@ui.bambooInfoDisplay]
+[/#if]
