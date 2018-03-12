@@ -7,7 +7,9 @@ import com.atlassian.bamboo.v2.build.BuildRepositoryChanges;
 import com.microsoft.teamfoundation.build.webapi.model.BuildResult;
 import com.microsoft.teamfoundation.plugin.ActualBuild;
 import org.apache.commons.lang3.StringUtils;
-
+/**
+ * Created by yacao on 4/27/2015.
+ */
 import java.util.Date;
 
 /**
