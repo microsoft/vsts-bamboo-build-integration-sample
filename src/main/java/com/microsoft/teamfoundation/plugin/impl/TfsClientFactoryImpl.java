@@ -49,7 +49,7 @@ public class TfsClientFactoryImpl implements TfsClientFactory {
         }
 
         String host = uri.getHost().toLowerCase();
-        return host.endsWith("visualstudio.com") || host.endsWith(".tfsallin.net");
+        return host.endsWith("dev.azure.com") || host.endsWith("visualstudio.com") || host.endsWith(".tfsallin.net");
     }
 
 }
